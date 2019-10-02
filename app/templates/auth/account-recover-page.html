@@ -1,0 +1,66 @@
+{% extends "base-layout.html" %}
+{% import "wtforms.html" as wtf %}
+
+{% block title %}Account Recover{% endblock title %}
+
+{% block content -%}
+<!--Main layout-->
+<main class="pt-10 center-row">
+
+    <!--Grid column-->
+    <div class="col-md-7 mb-4">
+
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        <!-- Material form login -->
+        <div class="card">
+
+            <h5 class="card-header info-color white-text text-center py-4">
+                <strong>Recover Account</strong>
+            </h5>
+
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-3">
+
+                <!-- Form -->
+                {{ wtf.form_start(form) }}
+
+                <!-- Email -->
+                {{ wtf.form_field(form.email) }}
+
+                <!-- Sign in button -->
+                {{ wtf.form_field(form.submit, field_class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0") }}
+
+                <div class="d-flex">
+                    <div>
+                        <!-- Register -->
+                        <p>Not a member?
+                            <a href="{{ url_for('auth.register') }}">Register</a>
+                        </p>
+                    </div>
+                    <div class="ml-auto">
+                        <!-- Login -->
+                        <a href="{{ url_for('auth.login') }}">Already have an account?</a>
+                    </div>
+                </div>
+
+
+                <!-- Form -->
+                {{ wtf.form_end() }}
+
+            </div>
+
+        </div>
+        <!-- Material form login -->
+    </div>
+    <!--Grid column-->
+</main>
+<!--Main layout-->
+{% endblock %}

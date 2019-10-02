@@ -1,0 +1,7 @@
+{% extends "profile-layout.html" %}
+
+{% block profile_content %}
+    {% include '_post.html' %}
+
+    {{ macros.pagination_widget(paginator, 'blog.index_posts') }}
+{% endblock profile_content %}

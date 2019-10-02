@@ -1,0 +1,25 @@
+{% extends "base-layout.html" %}
+
+{% block content -%}
+<!-- Intro Section -->
+<div class="pt-10">
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="row pt-5 mt-3">
+            <div class="col-md-12 mb-3">
+                <div class="intro-info-content text-center">
+                    <h1 class="display-3 blue-text mb-5 wow fadeInDown" data-wow-delay="0.3s">
+                        Hello <a class="blue-text font-weight-bold">{{ current_user.username }}</a>
+                    </h1>
+                    <h5 class="blue-text mb-5 mt-1 font-weight-bold wow fadeInDown"
+                        data-wow-delay="0.3s">You have not confirm your account yet!.</h5>
+                    <h5 class="blue-text mb-5 mt-1 font-weight-bold wow fadeInDown"
+                        data-wow-delay="0.3s">An email has been sent to your email account. It contains an activation link you must click to activate your account.</h5>
+                    <div class="wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="{{ url_for('auth.resend_confirmation') }}" class="btn btn-danger btn-rounded"><i class="fas fa-user left"></i> Resend a confirmation mail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

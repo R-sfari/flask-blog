@@ -1,0 +1,72 @@
+<div class="row">
+    {% for user in users -%}
+    <div class="col-md-4 mb-4">
+        <!-- Card Narrower -->
+        <div class="card card-cascade narrower">
+
+            <!-- Card image -->
+            <div class="view view-cascade overlay">
+                <img class="card-img-top" src="{{ user.gravatar(size=300) }}"
+                     alt="Card image cap">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <!-- Card content -->
+            <div class="card-body card-body-cascade">
+
+                <!-- Title -->
+                <h4 class="card-title"><a href="{{ url_for('blog.user_posts', username=user.username) }}"><strong>{{ '%s
+                    %s' % (user.first_name, user.last_name) }}</strong></a></h4>
+                <!-- Subtitle -->
+                <h6 class="font-weight-bold indigo-text py-2">Last Seen {{ moment(user.last_seen).fromNow() }}</h6>
+                <!-- Text -->
+                <p class="card-text">{% if user.about_me is not none %} {{ user.about_me|truncate(100) | safe }} {% else
+                    %} ---- {% endif %}</p>
+                <!-- Button -->
+                {% if current_user.is_following(user) %}
+                <a href="{{ url_for('blog.un_follow_user', username=user.username) }}"
+                   class="btn btn-info btn-rounded btn-md"> <i class="far fa-heart pr-2"></i> UnFollow
+                </a>
+                {% else %}
+                <a href="{{ url_for('blog.follow_user', username=user.username) }}"
+                   class="btn btn-info btn-rounded btn-md"> <i class="fas fa-heart pr-2"></i>
+                    Follow </a>
+                {% endif %}
+
+            </div>
+
+            {% if current_user.is_administrator() %}
+            <!-- Card footer -->
+            <div class="card-footer text-muted text-center">
+                <div class="d-flex">
+                    <div>
+                        <a href=""
+                           class="btn btn-success btn-rounded btn-sm px-3 waves-effect waves-light">
+                            <i class="fas fa-edit pr-2"></i> Edit
+                        </a>
+                    </div>
+                    <div class="ml-auto">
+                        <a href=""
+                           class="btn btn-danger btn-rounded btn-sm px-3 waves-effect waves-light">
+                            <i class="fas fa-trash pr-2"></i> Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <!-- Card Narrower -->
+    </div>
+    {% else %}
+    <div class="col-md-12">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Oops!</h4>
+            <p>No result found.</p>
+            <hr>
+            <p class="mb-0">If you notice this notice you will notice this notice is not worth noticing.</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>

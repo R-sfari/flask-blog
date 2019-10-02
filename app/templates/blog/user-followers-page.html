@@ -1,0 +1,55 @@
+{% extends "profile-layout.html" %}
+{% import '_macros.html' as marcos %}
+
+{% block profile_content -%}
+    {% for follower in followers %}
+    <!-- Grid row -->
+    <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-lg-2 col-xl-2">
+
+            <!-- Featured image -->
+            <div class="view overlay rounded z-depth-1-half mb-4 z-depth-1 rounded-circle">
+                <img class="img-fluid post-img"
+                     src="{{ follower.gravatar(size=300) }}"
+                     alt="Sample image">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-lg-10 col-xl-10">
+
+            <!-- Post title -->
+            <h3 class="font-weight-bold mb-3"><strong>{{ follower.full_name() }}</strong></h3>
+            <!-- Excerpt -->
+            <p class="dark-grey-text">{{ follower.about_me|truncate(300) | safe }}</p>
+            <!-- Read more button -->
+            <a href="{{ url_for('auth.profile', username=follower.username) }}" class="btn btn-info btn-rounded btn-md">
+                <i class="fas fa-book pr-2"></i> View profile
+            </a>
+
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+    <hr class="my-4">
+    {% else %}
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Oops!</h4>
+                <p>No result found.</p>
+                <hr>
+                <p class="mb-0">If you notice this notice you will notice this notice is not worth noticing.</p>
+            </div>
+        </div>
+    {% endfor %}
+
+    {{ macros.pagination_widget(paginator, 'blog.followers', username=user.username) }}
+{% endblock %}

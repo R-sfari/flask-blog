@@ -1,0 +1,87 @@
+{% macro pagination_widget(pagination, endpoint) %}
+{% if pagination.items|length > 0 %}
+<nav class="pt-2">
+    <ul class="pagination pg-dark flex-center">
+        <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+            <a class="page-link waves-effect waves-effect"
+               href="{% if pagination.has_prev %}{{ url_for(endpoint, page = pagination.page - 1, **kwargs) }}{% else %}#{% endif %}">
+                &laquo;
+            </a>
+        </li>
+        {% for p in pagination.iter_pages() %}
+        {% if p %}
+        {% if p == pagination.page %}
+        <li class="page-item active">
+            <a class="page-link waves-effect waves-effect" href="{{ url_for(endpoint, page = p, **kwargs) }}">{{ p
+                }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link waves-effect waves-effect" href="{{ url_for(endpoint, page = p, **kwargs) }}">{{ p
+                }}</a>
+        </li>
+        {% endif %}
+        {% else %}
+        <li class="page-item disabled"><a class="page-link waves-effect waves-effect" href="#">&hellip;</a></li>
+        {% endif %}
+        {% endfor %}
+        <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+            <a class="page-link waves-effect waves-effect"
+               href="{% if pagination.has_next %}{{ url_for(endpoint, page = pagination.page + 1, **kwargs) }}{% else %}#{% endif %}">
+                &raquo;
+            </a>
+        </li>
+    </ul>
+</nav>
+{% endif %}
+{% endmacro %}
+
+{% macro delete_form(endpoint, button_name='Delete', title='Confirmation required', msg='Are you sure you want to delete this entry?') %}
+
+{% set id = random_int() %}
+<button data-toggle="modal" data-target="#js-modal-{{ id }}"
+        class="btn btn-danger btn-rounded btn-sm px-3 waves-effect waves-light"><i class="fas fa-trash pr-2"></i> {{ button_name }}
+</button>
+<!-- Delete Modal -->
+<div class="modal fade" id="js-modal-{{ id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger" role="document">
+        <!--Content-->
+        <form class="modal-content" method="post" action="{{ url_for(endpoint, **kwargs) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">{{ title }}</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-trash fa-4x mb-3 animated rotateIn"></i>
+                    <p>{{ msg }}</p>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <button type="submit" class="btn btn-danger">Yes, sure <i class="far fa-gem ml-1 text-white"></i>
+                </button>
+                <button type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">No, thanks
+                </button>
+            </div>
+        </form>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Delete Modal-->
+{% endmacro %}
+
+{%- macro random_int(len=30) -%}
+{%- for _ in range(len) -%}
+{{ range(10) | random }}
+{%- endfor -%}
+{%- endmacro -%}

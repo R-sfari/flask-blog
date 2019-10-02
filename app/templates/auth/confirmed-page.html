@@ -1,0 +1,24 @@
+{% extends "base-layout.html" %}
+
+{% block content -%}
+<!-- Intro Section -->
+<div class="pt-10">
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="row pt-5 mt-3">
+            <div class="col-md-12 mb-3">
+                <div class="intro-info-content text-center">
+                    <h1 class="display-3 blue-text mb-5 wow fadeInDown" data-wow-delay="0.3s">
+                        Congrats <a class="blue-text font-weight-bold">{{ current_user.username }}</a>, your account is now activated.
+                    </h1>
+                    <h5 class="text-uppercase blue-text mb-5 mt-1 font-weight-bold wow fadeInDown"
+                        data-wow-delay="0.3s">Check it out now!</h5>
+                    <div class="wow fadeInUp" data-wow-delay="0.4s">
+                        <a class="btn btn-info btn-rounded"><i class="fas fa-user left"></i> My account</a>
+                        <a href="{{ url_for('blog.index_posts') }}" class="btn btn-outline-info btn-rounded"><i class="fas fa-book left"></i> Home Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

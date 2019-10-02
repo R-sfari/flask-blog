@@ -1,0 +1,194 @@
+{% extends "base-layout.html" %}
+{% import "wtforms.html" as wtf %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content -%}
+<!--Main layout-->
+<main class="pt-10 center-row">
+
+    <div class="mb-5">
+
+        <!--Grid row-->
+        <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-12 px-lg-5">
+                <!--Card-->
+                <div class="card card-cascade pb-5 mx-md-3">
+
+                    <!-- Card image -->
+                    <div class="view view-cascade gradient-card-header info-color">
+
+                        <!-- Title -->
+                        <h2 class="card-header-title mb-3">{{ '%s %s' % (user.first_name, user.last_name) }}</h2>
+                        <!-- Subtitle -->
+                        <p class="card-header-subtitle mb-0"><i class="fas fa-date"></i> Member since {{ moment(user.member_since).format('L') }}</p>
+                        <p class="card-header-subtitle mb-0">Last seen in {{ moment(user.last_seen).fromNow() }}</p>
+
+                    </div>
+
+                    <div class="card-body">
+                        {{ wtf.form_start(form) }}
+                        <!--Grid row-->
+                        <div class="row pt-lg-5 pt-3">
+
+                            <!--Grid column-->
+                            <div class="col-md-4 mb-3">
+                                <img src="{{ user.gravatar(size=400) }}" class="img-fluid z-depth-1">
+                            </div>
+                            <!--Grid column-->
+
+                            <!--Grid column-->
+                            <div class="col-md-7 ml-xl-5">
+
+                                <!-- Grid row -->
+                                <div class="row">
+
+                                    <!-- Grid column -->
+                                    <div class="col-lg-6">
+
+                                        {{ wtf.form_field(form.username) }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                    <!-- Grid column -->
+                                    <div class="col-lg-6">
+
+                                        {{ wtf.form_field(form.email) }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                </div>
+                                <!-- Grid row -->
+
+                                <!-- Grid row -->
+                                <div class="row">
+
+                                    <!-- Grid column -->
+                                    <div class="col-md-12">
+
+                                        <!-- Basic textarea -->
+                                        {{ wtf.form_field(form.about_me) }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                </div>
+                                <!-- Grid row -->
+
+                                <!-- Grid row -->
+                                <div class="row">
+
+                                    <!-- Grid column -->
+                                    <div class="col-lg-6">
+
+                                        {{ wtf.form_field(form.first_name) }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                    <!-- Grid column -->
+                                    <div class="col-lg-6">
+
+                                        {{ wtf.form_field(form.last_name) }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                </div>
+                                <!-- Grid row -->
+
+                                <!-- Grid row -->
+                                <div class="row">
+
+                                    <!-- Grid column -->
+                                    <div class="col-md-6">
+
+                                        {{ wtf.form_field(form.birthday) }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                    <!-- Grid column -->
+                                    <div class="col-md-6">
+
+                                        {{ wtf.form_field(form.phone) }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                </div>
+                                <!-- Grid row -->
+
+                                <!-- Grid row -->
+                                <div class="row">
+
+                                    <!-- Grid column -->
+                                    <div class="col-md-12">
+
+                                        {{ wtf.form_field(form.address) }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                </div>
+                                <!-- Grid row -->
+
+                                <!-- Grid row -->
+                                <div class="row">
+
+                                    <!-- Grid column -->
+                                    <div class="col-md-6">
+
+                                        {{ wtf.form_field(form.password, autocomplete="off") }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                    <!-- Grid column -->
+                                    <div class="col-md-6">
+
+                                        {{ wtf.form_field(form.second_password, autocomplete="off") }}
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                    <!-- Grid column -->
+                                    <div class="col-md-12">
+
+                                        {{ wtf.form_field(form.role) }}
+
+                                    </div>
+                                    <!-- Grid column -->
+                                </div>
+                                <!-- Grid row -->
+
+                                <!-- Sign in button -->
+                                {{ wtf.form_field(form.submit, field_class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0") }}
+                            </div>
+                            <!--/Grid Column-->
+
+                        </div>
+
+                    </div>
+                    <!--/Card-->
+                </div>
+                <!--/Grid column-->
+
+            </div>
+            <!--/Grid row-->
+        </div>
+
+    </div>
+</main>
+<!--Main layout-->
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ datepicker.loader() }} {# to load jQuery-ui #}
+    {{ datepicker.picker(id="#birthday") }}
+{% endblock %}

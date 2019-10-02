@@ -1,0 +1,217 @@
+{% extends "profile-layout.html" %}
+
+{% block profile_content -%}
+<!--Grid row-->
+<div class="row pt-lg-5 pt-3">
+
+    <!--Grid column-->
+    <div class="col-md-12 ml-xl-5">
+
+        <!-- Grid row -->
+        <div class="row pb-4">
+            <!-- Grid column -->
+            <div class="col-lg-12">
+                <!-- Grid row -->
+                <div class="row">
+                    <!-- Grid column -->
+                    <div>
+                        <h6 class="font-weight-bold">About Me</h6>
+                        <p class="grey-text">{% if user.about_me is not none %} {{
+                            user.about_me }} {% else %} ---- {% endif %}</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </div>
+        <!-- Grid row -->
+
+        <!-- Grid row -->
+        <div class="row pb-4">
+
+            <!-- Grid column -->
+            <div class="col-lg-6">
+                <!-- Grid row -->
+                <div class="row justify-content-center align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-lg-2 col-md-3 col-2">
+                        <i class="fas fa-user blue-text"></i>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-lg-10 col-md-9 col-10">
+                        <h6 class="font-weight-bold">Username (nickname)</h6>
+                        <p class="grey-text m-0">{{ user.username }}</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-6">
+                <!-- Grid row -->
+                <div class="row justify-content-center align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-lg-2 col-md-3 col-2">
+                        <i class="fas fa-mail-bulk blue-text"></i>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-lg-10 col-md-9 col-10">
+                        <h6 class="font-weight-bold">Email address</h6>
+                        <p class="grey-text m-0">{{ user.email }}</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <!-- Grid row -->
+        <div class="row pb-4">
+
+            <!-- Grid column -->
+            <div class="col-md-6">
+
+                <!-- Grid row -->
+                <div class="row justify-content-center align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-lg-2 col-md-3 col-2">
+                        <i class="fas fa-id-card-alt blue-text"></i>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-lg-10 col-md-9 col-10">
+                        <h6 class="font-weight-bold">First name</h6>
+                        <p class="grey-text m-0">{% if user.first_name is not none %} {{
+                            user.first_name }} {% else %} ---- {% endif %}</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-6">
+
+                <!-- Grid row -->
+                <div class="row justify-content-center align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-lg-2 col-md-3 col-2">
+                        <i class="fas fa-id-card-alt blue-text"></i>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-lg-10 col-md-9 col-10">
+                        <h6 class="font-weight-bold">Last name</h6>
+                        <p class="grey-text m-0">{% if user.last_name is not none %} {{
+                            user.last_name }} {% else %} ---- {% endif %}</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <!-- Grid row -->
+        <div class="row pb-4">
+            <!-- Grid column -->
+            <div class="col-lg-6 col-md-6">
+
+                <!-- Grid row -->
+                <div class="row justify-content-center align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-lg-2 col-md-3 col-2">
+                        <i class="fas fa-calendar-week blue-text"></i>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-lg-10 col-md-9 col-10">
+                        <h6 class="font-weight-bold">Birthday</h6>
+                        <p class="grey-text m-0">{% if user.birthday is not none %} {{
+                            moment(user.birthday).format('L') }} {% else %} ---- {% endif
+                            %}</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-6 col-md-6">
+
+                <!-- Grid row -->
+                <div class="row justify-content-center align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-lg-2 col-md-3 col-2">
+                        <i class="fas fa-phone blue-text fa-x2"></i>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-lg-10 col-md-9 col-10">
+                        <h6 class="font-weight-bold">Phone</h6>
+                        <p class="grey-text m-0">{% if user.phone is not none %} {{
+                            user.phone
+                            }} {% else %} ---- {% endif %}</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <!-- Grid row -->
+        <div class="row pb-4">
+            <!-- Grid column -->
+            <div class="col-lg-12">
+
+                <!-- Grid row -->
+                <div class="row justify-content-center align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-lg-1 col-md-2 col-1">
+                        <i class="fas fa-calendar-week blue-text"></i>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-lg-11 col-md-10 col-11">
+                        <h6 class="font-weight-bold">Address</h6>
+                        <p class="grey-text m-0">{% if user.address is not none %} {{
+                            user.address }} {% else %} ---- {% endif %}</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!--/Grid Column-->
+
+</div>
+{% endblock %}

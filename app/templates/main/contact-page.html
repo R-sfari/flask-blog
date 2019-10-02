@@ -1,0 +1,61 @@
+{% extends "base-layout.html" %}
+{% import "wtforms.html" as wtf %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block content -%}
+<!--Main layout-->
+<main class="pt-10 center-row">
+
+    <!--Grid column-->
+    <div class="col-md-7 mb-4">
+
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        <!-- Material form contact -->
+<div class="card">
+
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Contact us</strong>
+    </h5>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+
+        <!-- Form -->
+        {{ wtf.form_start(form) }}
+
+            <!-- Name -->
+            {{ wtf.form_field(form.name) }}
+
+            <!-- E-mail -->
+            {{ wtf.form_field(form.email) }}
+
+            <!-- Subject -->
+            {{ wtf.form_field(form.subject) }}
+
+            <!--Message-->
+            {{ wtf.form_field(form.message) }}
+
+            <!-- Send button -->
+            {{ wtf.form_field(form.submit, field_class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect") }}
+
+        {{ wtf.form_end() }}
+        <!-- Form -->
+
+    </div>
+
+</div>
+<!-- Material form contact -->
+    </div>
+    <!--Grid column-->
+</main>
+<!--Main layout-->
+{% endblock %}

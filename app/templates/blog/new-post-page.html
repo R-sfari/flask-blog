@@ -1,0 +1,70 @@
+{% extends "base-layout.html" %}
+{% import "wtforms.html" as wtf %}
+
+{% block title %}Contact{% endblock title %}
+
+{%- block styles %}
+{{ super() }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock styles %}
+
+{% block content -%}
+<!--Main layout-->
+<main class="pt-10 center-row">
+
+    <!--Grid column-->
+    <div class="col-md-7 mb-4">
+
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        {% if current_user.can(Permission.WRITE) %}
+        <!-- Material form contact -->
+        <div class="card">
+            <h5 class="card-header info-color white-text text-center py-4">
+                <strong>What's on your mind ?</strong>
+            </h5>
+
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-4">
+                <!-- Form -->
+                {{ wtf.form_start(form) }}
+
+                <!-- File -->
+                {{ wtf.form_field(form.file) }}
+
+                <!-- Title -->
+                {{ wtf.form_field(form.title) }}
+                <!-- Body -->
+                {{ form.body() }}
+                <!-- Send button -->
+                {{ wtf.form_field(form.submit, field_class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4
+                waves-effect") }}
+
+                {{ wtf.form_end() }}
+                <!-- Form -->
+
+            </div>
+
+        </div>
+        <!-- Material form contact -->
+        {% endif %}
+    </div>
+    <!--Grid column-->
+</main>
+<!--Main layout-->
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+  new SimpleMDE({ element: document.getElementById("js-markdown-field") });
+</script>
+{% endblock %}

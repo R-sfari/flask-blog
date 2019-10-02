@@ -1,0 +1,154 @@
+{% extends "base-layout.html" %}
+{% import "wtforms.html" as wtf %}
+
+{% block title %}Index{% endblock title %}
+
+{% block content %}
+<section class="section">
+
+    <!--Section heading-->
+    <h2 class="text-center my-5 h3">Flask <span class="blue-text font-weight-bold">Extensions</span> and  <span class="blue-text font-weight-bold">Libraries</span> Installed +</h2>
+
+    <!--First row-->
+    <div class="row justify-content-center align-items-center">
+
+        <!--First column-->
+        <div class="col-md-4 text-justify">
+            <!--First row-->
+            <div class="row">
+                <div class="col-2">
+                    <i class="fas fa-2x fa-check-circle blue-text"></i>
+                </div>
+                <div class="col-10">
+                    <h5 class="font-weight-bold mb-4">Flask-SQLAlchemy</h5>
+                    <p class="grey-text">Flask-SQLAlchemy is an extension for Flask that adds support for SQLAlchemy to your application. It aims to simplify using SQLAlchemy with Flask by providing useful defaults and extra helpers that make it easier to accomplish common tasks.</p>
+                </div>
+            </div>
+            <!--/First row-->
+
+            <!--Second row-->
+            <div class="row">
+                <div class="col-2">
+                    <i class="fas fa-2x fa-check-circle blue-text"></i>
+                </div>
+                <div class="col-10">
+                    <h5 class="font-weight-bold mb-4"> Flask-DebugToolbar </h5>
+                    <p class="grey-text">This extension adds a toolbar overlay to Flask applications containing useful information for debugging.</p>
+                </div>
+            </div>
+            <!--/Second row-->
+
+            <!--Third row-->
+            <div class="row">
+                <div class="col-2">
+                    <i class="fas fa-2x fa-check-circle blue-text"></i>
+                </div>
+                <div class="col-10">
+                    <h5 class="font-weight-bold mb-4">Flask-WTF</h5>
+                    <p class="grey-text">Simple integration of Flask and WTForms, including CSRF, file upload, and reCAPTCHA. .</p>
+                </div>
+            </div>
+            <!--/Third row-->
+
+            <!--Third row-->
+            <div class="row">
+                <div class="col-2">
+                    <i class="fas fa-2x fa-check-circle blue-text"></i>
+                </div>
+                <div class="col-10">
+                    <h5 class="font-weight-bold mb-4">Flask-Uploads</h5>
+                    <p class="grey-text">Flask-Uploads allows your application to flexibly and efficiently handle file uploading and serving the uploaded files.</p>
+                </div>
+            </div>
+            <!--/Third row-->
+
+            <!--Fourth row-->
+            <div class="row">
+                <div class="col-2">
+                    <i class="fas fa-2x fa-check-circle blue-text"></i>
+                </div>
+                <div class="col-10">
+                    <h5 class="font-weight-bold mb-4">Flask-Mail</h5>
+                    <p class="grey-text">The Flask-Mail extension provides a simple interface to set up SMTP with your Flask application and to send messages from your views and scripts.</p>
+                </div>
+            </div>
+            <!--/Fourth row-->
+        </div>
+        <!--/First column-->
+
+        <!--Second column-->
+        <div class="col-md-4 mb-4 flex-center d-none d-xl-block text-center">
+            <img src="{{ url_for('static', filename='img/device.png') }}" alt="MDB magazine template displayed on iPhone" class="z-depth-0 img-fluid">
+            <!--CTA-->
+        </div>
+        <!--/Second column-->
+
+        <!--Third column-->
+        <div class="col-md-4 text-justify">
+            <!--First row-->
+            <div class="row">
+                <div class="col-2">
+                    <i class="fas fa-2x fa-check-circle blue-text"></i>
+                </div>
+                <div class="col-10">
+                    <h5 class="font-weight-bold mb-4">Flask-Login</h5>
+                    <p class="grey-text">Flask-Login provides user session management for Flask. It handles the common tasks of logging in, logging out, and remembering your users’ sessions over extended periods of time.</p>
+                </div>
+            </div>
+            <!--/First row-->
+
+            <!--Second row-->
+            <div class="row">
+                <div class="col-2">
+                    <i class="fas fa-2x fa-check-circle blue-text"></i>
+                </div>
+                <div class="col-10">
+                    <h5 class="font-weight-bold mb-4">Jinja</h5>
+                    <p class="grey-text">
+                        Jinja is a web template engine for the Python programming language and is licensed under a BSD License created by Armin Ronacher. It is similar to the Django template engine but provides Python-like expressions while ensuring that the templates are evaluated in a sandbox.
+                    </p>
+                </div>
+            </div>
+            <!--/Second row-->
+
+            <!--Third row-->
+            <!--/Third row-->
+
+            <!--Fourth row-->
+            <div class="row">
+                <div class="col-2">
+                    <i class="fas fa-2x fa-check-circle blue-text"></i>
+                </div>
+                <div class="col-10">
+                    <h5 class="font-weight-bold mb-4">Flask-Migrate</h5>
+                    <p class="grey-text">Flask-Migrate is an extension that handles SQLAlchemy database migrations for Flask applications using Alembic. The database operations are made available through the Flask command-line interface or through the Flask-Script extension.
+                    </p>
+                </div>
+            </div>
+            <!--/Fourth row-->
+
+            <!--Fourth row-->
+            <div class="row">
+                <div class="col-2">
+                    <i class="fas fa-2x fa-check-circle blue-text"></i>
+                </div>
+                <div class="col-10">
+                    <h5 class="font-weight-bold mb-4">Flask-Images</h5>
+                    <p class="grey-text">Flask-Images is a Flask extension that provides dynamic image resizing for your application.</p>
+                </div>
+            </div>
+            <!--/Fourth row-->
+        </div>
+        <!--/Third column-->
+    </div>
+    <!--/First row-->
+
+    <!--CTA-->
+    <div class="text-center mt-3 pb-0 d-xl-none">
+        <a href="#" class="btn btn-sm btn-outline-default z-depth-0 rounded waves-effect waves-light">Buy MDB Pro now<i class="fas fa-long-arrow-alt-up ml-2"></i></a>
+    </div>
+    <!--CTA-->
+
+
+</section>
+{% endblock content %}

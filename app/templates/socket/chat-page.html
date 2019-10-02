@@ -1,0 +1,105 @@
+{% extends "base-layout.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<!-- Classic tabs -->
+<div class="classic-tabs mx-2 pt-5">
+    <ul class="nav tabs-info" id="js-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link  waves-light active show" id="js-chat-room-tab" data-toggle="tab"
+               href="#js-chat-room-content"
+               role="tab" aria-controls="js-chat-room" aria-selected="true">
+                <i class="fas fa-home fa-2x pb-2"
+                   aria-hidden="true"></i><br>Chat Room</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-light" id="js-online-user-tab" data-toggle="tab"
+               href="#js-online-user-content"
+               role="tab" aria-controls="js-user-tab" aria-selected="false">
+                <i class="fas fa-users fa-2x pb-2"
+                   aria-hidden="true"></i><br>Online Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-light" id="js-user-tab" data-toggle="tab"
+               href="#js-user-content"
+               role="tab" aria-controls="follow-classic-orange" aria-selected="false">
+                <i class="fas fa-users fa-2x pb-2"
+                   aria-hidden="true"></i><br>Users</a>
+        </li>
+    </ul>
+
+    <div class="tab-content card" id="js-tab-content">
+        <div class="tab-pane fade active show" id="js-chat-room-content" role="tabpanel"
+             aria-labelledby="profile-tab-classic-orange">
+            <div class="chat-list-msg" id="scrollbar">
+                <ul class="list-group list-group-flush" id="js-chat-room"></ul>
+            </div>
+            <div class="chat-form pt-4">
+                <div class="form-group basic-textarea">
+                    <textarea class="form-control pl-2 my-0" id="js-text" rows="3"
+                              placeholder="Type your message here..." spellcheck="false"></textarea>
+                </div>
+                <button id="js-send-message" type="button"
+                        class="btn btn-info btn-rounded btn-sm waves-effect waves-light float-right"> Send
+                </button>
+            </div>
+        </div>
+        <div class="tab-pane fade  chat-content" id="js-online-user-content" role="tabpanel"
+             aria-labelledby="follow-tab-classic-orange">
+            <ul class="list-group list-group-flush" id="js-users-in-room"></ul>
+        </div>
+        <div class="tab-pane fade  chat-content" id="js-user-content" role="tabpanel"
+             aria-labelledby="contact-tab-classic-orange">
+            <ul class="list-group list-group-flush">
+                {% for user_room in current_room.room_users %}
+                <li class="list-group-item"><a href="{{ url_for('auth.profile', username=user_room.user.username) }}">{{ user_room.user.full_name() }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Classic tabs -->
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+{% if current_room is not none %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+<script type="text/javascript" charset="utf-8">
+$( document ).ready(function() {
+    const socket = io();
+    const current_user = '{{ current_user.username }}';
+    const current_room = '{{ current_room.id }}';
+
+    socket.on('connect', function() {
+        socket.emit('join', {room: current_room});
+    });
+
+    socket.on('status', function(message) {
+        $(document).find("#js-users-in-room").append('<li class="list-group-item">'+ message +'</li>');
+    });
+
+    socket.on('text', function(data) {
+        $(document).find("#js-chat-room").append('<li class="list-group-item"><strong>'+ data.user_full_name + '</strong> : ' + data.message +'</li>');
+        $('#scrollbar').scrollTop($('#scrollbar')[0].scrollHeight);
+    });
+
+    $('#js-text').keypress(function(e) {
+        const code = e.keyCode || e.which;
+        if (code == 13) {
+            const text = $('#js-text').val();
+            $('#js-text').val("");
+            socket.emit('message', {message: text, room: current_room});
+        }
+    });
+
+    $('#js-send-message').click(function(e) {
+        text = $('#js-text').val();
+            $('#js-text').val('');
+            socket.emit('message', {message: text, room: current_room});
+    });
+});
+
+</script>
+{% endif %}
+{% endblock scripts %}

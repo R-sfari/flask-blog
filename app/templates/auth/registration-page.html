@@ -1,0 +1,98 @@
+{% extends "base-layout.html" %}
+{% import "wtforms.html" as wtf %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content -%}
+<!--Main layout-->
+<main class="pt-10 center-row">
+
+    <!--Grid column-->
+    <div class="col-md-7 mb-4">
+
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        <!-- Material form register -->
+        <div class="card">
+
+            <h5 class="card-header info-color white-text text-center py-4">
+                <strong>Sign up</strong>
+            </h5>
+
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-0">
+
+                <!-- Form -->
+                {{ wtf.form_start(form) }}
+
+                    <div class="form-row">
+                        <div class="col">
+                            <!-- First name -->
+                            {{ wtf.form_field(form.first_name) }}
+                        </div>
+                        <div class="col">
+                            <!-- Last name -->
+                            {{ wtf.form_field(form.last_name) }}
+                        </div>
+                    </div>
+
+                    <!-- Username -->
+                    {{ wtf.form_field(form.username, group_extra_classes="mt-0") }}
+
+                    <!-- E-mail -->
+                    {{ wtf.form_field(form.email) }}
+
+                    <!-- Password -->
+                    {{ wtf.form_field(form.password) }}
+                    {{ wtf.form_field(form.second_password) }}
+
+                    <!-- Phone number -->
+                    {{ wtf.form_field(form.phone) }}
+
+                    <!-- Newsletter -->
+                    {{ wtf.form_field(form.news_letter) }}
+
+                    <!-- Sign up button -->
+                    {{ wtf.form_field(form.submit, field_class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0") }}
+
+
+                    <!-- Register -->
+                    <div class="d-flex">
+                        <div>
+                            <!-- Forgot password -->
+                            <a href="{{ url_for('auth.account_recover') }}">Forgot password?</a>
+                        </div>
+                        <div class="ml-auto">
+                            <!-- Login -->
+                            <a href="{{ url_for('auth.login') }}">Already have an account?</a>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Terms of service -->
+                    <p>By clicking
+                        <em>Sign up</em> you agree to our
+                        <a href="" target="_blank">terms of service</a>
+                    </p>
+
+
+                {{ wtf.form_end() }}
+                <!-- Form -->
+
+            </div>
+
+        </div>
+        <!-- Material form register -->
+    </div>
+    <!--Grid column-->
+</main>
+<!--Main layout-->
+{% endblock %}
