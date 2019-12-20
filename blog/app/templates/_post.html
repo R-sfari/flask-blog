@@ -1,0 +1,69 @@
+{% for post in posts %}
+<!-- Grid row -->
+<div class="row">
+
+    <!-- Grid column -->
+    <div class="col-lg-5 col-xl-4">
+
+        <!-- Featured image -->
+        <div class="view overlay rounded z-depth-1-half mb-4">
+            <img class="img-fluid post-img" src="{% if post.image_filename %}{{ render_uploaded_file_url(filename=post.image_filename) }}{% else %}{{ url_for('static', filename='img/no-image-icon.png') }}{% endif %}" alt="Sample image">
+            <a>
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+
+        {% if post.is_author(current_user) or current_user.is_administrator() %}
+        <section class="mb-4">
+            <div class="d-flex">
+                <div>
+                    <a href="{{ url_for('blog.edit_post', identifier=post.id) }}"
+                       class="btn btn-success btn-rounded btn-sm px-3 waves-effect waves-light">
+                        <i class="fas fa-edit pr-2"></i> Edit
+                    </a>
+                </div>
+                <div class="ml-auto">
+                    <a href="{{ url_for('blog.delete_post', identifier=post.id) }}"
+                       class="btn btn-danger btn-rounded btn-sm px-3 waves-effect waves-light">
+                        <i class="fas fa-trash pr-2"></i> Delete
+                    </a>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-lg-7 col-xl-8">
+
+        <!-- Post title -->
+        <h3 class="font-weight-bold mb-3"><strong>{{ post.title }}</strong></h3>
+        <!-- Excerpt -->
+        <p class="dark-grey-text">{{ post.body|truncate(300) | safe }}</p>
+        <!-- Post data -->
+        <p>by <a href="{{ url_for('auth.profile', username=post.author.username) }}"
+                 class="font-weight-bold">{{ post.author.full_name() }}</a>, {{ moment(post.timestamp).fromNow() }}</p>
+        <!-- Read more button -->
+        <a href="{{ url_for('blog.show_post', identifier=post.id) }}"
+           class="btn btn-info btn-rounded btn-md">
+            <i class="fas fa-book pr-2"></i> Read more
+        </a>
+
+    </div>
+    <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+
+<hr class="my-4">
+{% else %}
+    <div class="col-md-12">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Oops!</h4>
+            <p>No result found.</p>
+            <hr>
+            <p class="mb-0">If you notice this notice you will notice this notice is not worth noticing.</p>
+        </div>
+    </div>
+{% endfor %}

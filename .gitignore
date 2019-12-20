@@ -130,6 +130,7 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
+data/
 .env
 .venv
 env/
@@ -168,4 +169,4 @@ Pipfile.*
 app.*
 
 # uploads
-app/media/images/**
+media/**

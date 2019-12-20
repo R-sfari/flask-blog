@@ -1,0 +1,74 @@
+<!doctype html>
+<html {% block html_attribs %} lang="en" {% endblock html_attribs %}>
+<head>
+    <title>{% block title %}{{ title|default('social blogging') }}{% endblock title %}</title>
+
+    {%- block metas %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%- endblock metas %}
+
+    {% block favicon %}
+    <!-- favicon-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    {% endblock %}
+
+    {%- block styles %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {%- endblock styles %}
+
+</head>
+<body {% block body_attribs %}{% endblock body_attribs %}>
+
+<!-- HTML CODE -->
+{% block body -%}
+
+<!-- Preloader -->
+<div class="preloader-it">
+    <div class="loader-pendulums"></div>
+</div>
+<!-- /Preloader -->
+
+<!-- Main page -->
+<div class="hk-wrapper">
+    
+    <!--Main container-->
+    <div class="container">
+        {% block content -%}
+        {%- endblock content %}
+    </div>
+    <!--Main container-->
+
+</div>
+<!-- Main page -->
+{%- endblock body %}
+
+<!-- SCRIPTS -->
+{% block scripts %}
+<!-- JQuery -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+
+<script type="text/javascript">
+        // Load function start
+        $(window).on("load",function(){
+            $(".preloader-it").delay(500).fadeOut("slow");
+        });
+</script>
+{%- endblock scripts %}
+</body>
+</html>
